@@ -5,7 +5,7 @@ import { FaQuoteRight } from "react-icons/fa";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 const Carousel = () => {
-  const [people, setPeople] = useState(list);
+  const [people, setPeople] = useState(longList);
   const [currentPerson, setCurrentPerson] = useState(0);
 
   const prevSlide = () => {
@@ -29,6 +29,8 @@ const Carousel = () => {
             className="slide"
             style={{
               transform: `translateX(${100 * (personIndex - currentPerson)}%)`,
+              opacity: personIndex === currentPerson ? 1 : 0,
+              visibility: personIndex === currentPerson ? "visible" : "hidden",
             }}
             key={id}
           >
