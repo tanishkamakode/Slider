@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { list, shortList, longList } from "./data";
 import { FaQuoteRight } from "react-icons/fa";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
@@ -14,12 +14,23 @@ const Carousel = () => {
       return result;
     });
   };
+
   const nextSlide = () => {
     setCurrentPerson((oldPerson) => {
       const result = (oldPerson + 1) % people.length;
       return result;
     });
   };
+
+  useEffect(() => {
+    let sliderId = setInterval(() => {
+      nextSlide();
+    }, 5000);
+    return () => {
+      clearInterval(sliderId);
+    };
+  }, [currentPerson]);
+
   return (
     <section className="slider-container">
       {people.map((person, personIndex) => {
